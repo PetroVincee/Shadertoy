@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="shader"></canvas>
+</body>
+<script type="x-shader/x-vertex" id="vertex-shader">
+		attribute vec3 aVertexPosition;
+
+		void main(void) {
+			gl_Position = vec4(aVertexPosition, 1.0);
+		}
+
+</script>
+
+<script type="x-shader/x-fragment" id="fragment-shader">
+		precision mediump float;
+
+        uniform highp float uTime;
+        uniform vec2 uRes;
+
+		void main(void) {
+            float scale = 0.01;
+            float time = uTime * 100.0;
+            float r1 = 0.4 ;
+            float r2 = 0.9 ;
+            float r3 = 0.29;
+            float x = gl_FragCoord.x;
+            float y = gl_FragCoord.y;
+            float h = uRes.y;
+            float w = uRes.x;
+
+
+            float col =
+			    sin(distance( vec2(x * r1 + time, y * r2), vec2(w / r3 , h) ) * scale) +
+			    sin(distance( vec2(x, y * r2), vec2(1.0 / h * r3, w * r1) ) * scale) +
+			    sin(distance( vec2(r3 * x + time, r1 * y + time), vec2(w * r2 + h * r1, h * r2) ) * scale) +
+			    sin(distance( vec2(1.0 / x * r3 , y * r2), vec2(h, w) ) * scale);
+
+            vec3 color = vec3( 0.5 + 0.5 * sin(col), cos(col), cos(col) - sin(col)) + 0.1;
+            color += mod(gl_FragCoord.x, 2.0) < 1.0 ? 0.0 : 0.4;
+
+            gl_FragColor = vec4(color,  1.0);
+		}
+
+</script>
+    <script>
+        function init(){
+            var canvas = document.querySelector("canvas");
+            gl = canvas.getContext('experimental-webgl');
+            program = gl.createProgram();
+
+            for (let i = 0; i < 2; ++i) {
+                let source = document.getElementById(i===0 ? "vertex-shader" : "fragment-shader").text;
+                let shaderObj = gl.createShader(i===0 ? gl.VERTEX_SHADER : gl.FRAGMENT_SHADER);
+
+                gl.shaderSource(shaderObj, source);
+                gl.compileShader(shaderObj);
+
+                let status = gl.getShaderParameter(shaderObj, gl.COMPILE_STATUS);
+
+                if (!status) alert(gl.getShaderInfoLog(shaderObj));
+
+                gl.attachShader(program, shaderObj);
+                gl.linkProgram(program);
+            }
+            var width = canvas.width = window.innerWidth;//document.body.innerWidth;
+            var height = canvas.height = window.innerHeight;//document.body.innerHeight;
+
+            var startTime = (new Date()).getTime();
+
+            program.aVertexPosition = gl.getUniformLocation(program, "aVertexPosition");
+            program.uTime = gl.getUniformLocation(program, "uTime");
+            program.uRes = gl.getUniformLocation(program, "uRes");
+
+            gl.useProgram(program);
+            var pos = [-1, 1,
+                -1, -1,
+                1, -1,
+                1, -1,
+                1, 1,
+                -1, 1];
+
+            var bufPos = gl.createBuffer();
+            gl.bindBuffer( gl.ARRAY_BUFFER, bufPos );
+            gl.bufferData( gl.ARRAY_BUFFER,new Float32Array(pos), gl.STATIC_DRAW);
+
+            gl.uniform2fv(program.uRes, [width, height]);
+
+            gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
+            (function drawScene() {
+                var time = (new Date()).getTime() - startTime;
+
+                gl.clear(gl.COLOR_BUFFER_BIT);
+
+                gl.uniform1f(program.uTime, time * 0.001);
+
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+
+                requestAnimationFrame(drawScene);
+            })();
+
+            window.onresize = function () {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                gl.viewport(0, 0, canvas.width, canvas.height);
+                gl.uniform2fv(program.uRes, [width, height]);
+            }
+        }
+        init();
+    </script>
+</html>

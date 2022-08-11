@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./src/css/css.css"/>
+    <title>FirstTry</title>
+</head>
+<body>
+<canvas id="ogl-canvas"></canvas>
+<header>
+    <nav class="left-nav">
+        <a>Kezdőlap</a>
+        <a>Csomagok</a>
+        <a>Botok</a>
+        <img class="header-logo" src="./src/img/ts_icon.png">
+        <a>Hasznos</a>
+        <a>Rólunk</a>
+        <a class="login-btn">Belépés</a>
+    </nav>
+</header>
+<main>
+
+    <h1 class="hero">TRADENSEA</h1>
+    <br/>
+    <section class="slider">
+        <h2 id="slider-title">SPOT BOT</h2>
+        <p id="slider-description">
+            Kiváló a támasz és ellenállási szintek, HODL, RSI, MA, GAP stratégiáknak az automatizálására. Beállíthatod, hogy egyszer, többször, vagy akár korlátlanul is teljesítse a kívánt tranzakciókat.
+        </p>
+        <div class="slider-buttons-wrapper" >
+            <div class="slider-button">
+                <svg id='slider-left-arrow' width="59" height="39" viewBox="0 0 59 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M59 19.5L1 19.5" stroke="#FFFEFE"/>
+                    <path d="M20 38L1.5 19.5L20 1" stroke="#FFFEFE"/>
+                </svg>
+                <span id="slider-left-title"></span>
+            </div>
+            <div class="slider-button">
+                <svg id='slider-right-arrow'  width="67" height="39" viewBox="0 0 67 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.5 19.5L66 19.5" stroke="#FFFEFE"/>
+                    <path d="M47 1L65.5 19.5L47 38" stroke="#FFFEFE"/>
+                </svg>
+                <span id="slider-right-title">
+
+                    </span>
+            </div>
+        </div>
+    </section>
+
+</main>
+</body>
+
+<script id="draw-shader-fs" type="x-shader/x-fragment">
+
+    precision mediump float;
+
+    uniform float iR;
+    uniform float iG;
+    uniform float iB;
+
+    uniform vec2 iResolution;
+    uniform vec2 iMouse;
+    uniform float iTime;
+
+    //Chnage from here---
+
+    void mainImage(out vec4 fragColor, in vec2 fragCoord)
+    {
+        vec2 uv = fragCoord/iResolution.xy;
+
+        uv *= 6.5;
+
+        float len;
+
+        for(int i = 0; i < 5; i++) {
+            len = length(uv) / 2.;
+            uv.x +=  sin(uv.y + iTime * 0.5);
+            uv.y +=  cos(uv.x + iTime * 0.5 + cos(len * 4.0))*1.;
+        }
+
+        //RGB colors:         R             G              B
+        vec3 col = vec3(cos(len + iR), cos(len + iG), cos(len - iB));
+
+        fragColor = vec4(col,0.5);
+    }
+
+    //To here----
+
+    void main()
+    {
+        mainImage( gl_FragColor, gl_FragCoord.xy );
+    }
+
+</script>
+
+<!--vertex shader-->
+<script id="draw-shader-vs" type="x-shader/x-vertex">
+
+    attribute vec3 inPos;
+
+    void main()
+    {
+        gl_Position = vec4(inPos, 1.0);
+    }
+</script>
+
+
+<script src="asd.js" defer ></script>
+</html>
