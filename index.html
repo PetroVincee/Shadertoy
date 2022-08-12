@@ -1,112 +1,103 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./src/css/css.css"/>
-    <title>FirstTry</title>
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/style.css">
+
 </head>
 <body>
-<canvas id="ogl-canvas"></canvas>
-<header>
-    <nav class="left-nav">
-        <a>Kezdőlap</a>
-        <a>Csomagok</a>
-        <a>Botok</a>
-        <img class="header-logo" src="./src/img/ts_icon.png">
-        <a>Hasznos</a>
-        <a>Rólunk</a>
-        <a class="login-btn">Belépés</a>
-    </nav>
-</header>
-<main>
+    <canvas id="shader"></canvas>
+    <header>
+        <nav>
+            <a href="">Kezdőlap</a>
+            <a href="">Csomagok</a>
+            <a href="">Botok</a>
+            <img src="assets/tradensea.png" alt="Tradensea">
+            <a href="">Hasznos</a>
+            <a href="">Rólunk</a>
+            <a id="login" href="" class="btn_login">Belépés</a>
+        </nav>
+    </header>
+    <div class="container">
 
-    <h1 class="hero">TRADENSEA</h1>
-    <br/>
-    <section class="slider">
-        <h2 id="slider-title">SPOT BOT</h2>
-        <p id="slider-description">
-            Kiváló a támasz és ellenállási szintek, HODL, RSI, MA, GAP stratégiáknak az automatizálására. Beállíthatod, hogy egyszer, többször, vagy akár korlátlanul is teljesítse a kívánt tranzakciókat.
-        </p>
-        <div class="slider-buttons-wrapper" >
-            <div class="slider-button">
-                <svg id='slider-left-arrow' width="59" height="39" viewBox="0 0 59 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M59 19.5L1 19.5" stroke="#FFFEFE"/>
-                    <path d="M20 38L1.5 19.5L20 1" stroke="#FFFEFE"/>
-                </svg>
-                <span id="slider-left-title"></span>
-            </div>
-            <div class="slider-button">
-                <svg id='slider-right-arrow'  width="67" height="39" viewBox="0 0 67 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.5 19.5L66 19.5" stroke="#FFFEFE"/>
-                    <path d="M47 1L65.5 19.5L47 38" stroke="#FFFEFE"/>
-                </svg>
-                <span id="slider-right-title">
+        <div class="content">
+            <h1>Tradensea</h1>
+            <h2 id="title">Spot Bot</h2>
+            <p id="description">Kiváló a támasz és ellenállási szintek, HODL, RSI, MA, GAP stratégiáknak az automatizálására. Beállíthatod, hogy egyszer, többször, vagy akár korlátlanul is teljesítse a kívánt tranzakciókat.</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+            </svg>
+            <div class="slider">
+                <span id="left" class="line ">
+                    <span class="arrow"></span>
+                </span>
 
+                <span id="right" class="line">
+                    <span class="arrow"></span>
+                </span>
+                <div class="lineHelper">
+                    <span class="line2 down">
+                        <span class="arrow2"></span>
                     </span>
+                </div>
+                <span class="lineRSI">RSI bot</span>
+                <span class="lineGene">Generátor</span>
+                <div class="counter"></div>
+                <h3>Sikerre<br> <span style=" margin-left:-0.5em;font-weight: 300 !important;letter-spacing: 0.35em !important;">programozva</span> </h3>
             </div>
         </div>
-    </section>
-
-</main>
+    </div>
 </body>
+<script type="module" src="assets/script.js"></script>
+<script type="x-shader/x-vertex" id="vertex-shader">
+		attribute vec3 aVertexPosition;
 
-<script id="draw-shader-fs" type="x-shader/x-fragment">
-
-    precision mediump float;
-
-    uniform float iR;
-    uniform float iG;
-    uniform float iB;
-
-    uniform vec2 iResolution;
-    uniform vec2 iMouse;
-    uniform float iTime;
-
-    //Chnage from here---
-
-    void mainImage(out vec4 fragColor, in vec2 fragCoord)
-    {
-        vec2 uv = fragCoord/iResolution.xy;
-
-        uv *= 6.5;
-
-        float len;
-
-        for(int i = 0; i < 5; i++) {
-            len = length(uv) / 2.;
-            uv.x +=  sin(uv.y + iTime * 0.5);
-            uv.y +=  cos(uv.x + iTime * 0.5 + cos(len * 4.0))*1.;
-        }
-
-        //RGB colors:         R             G              B
-        vec3 col = vec3(cos(len + iR), cos(len + iG), cos(len - iB));
-
-        fragColor = vec4(col,0.5);
-    }
-
-    //To here----
-
-    void main()
-    {
-        mainImage( gl_FragColor, gl_FragCoord.xy );
-    }
+		void main() {
+			gl_Position = vec4(aVertexPosition, 1.0);
+		}
 
 </script>
 
-<!--vertex shader-->
-<script id="draw-shader-vs" type="x-shader/x-vertex">
+<script type="x-shader/x-fragment" id="fragment-shader">
+		precision mediump float;
 
-    attribute vec3 inPos;
+        uniform highp float uTime;
+        uniform vec2 uRes;
 
-    void main()
-    {
-        gl_Position = vec4(inPos, 1.0);
-    }
+        uniform float iR;
+        uniform float iG;
+        uniform float iB;
+
+		void main() {
+            float scale = 0.009;
+            float time = uTime * 100.0;
+            float r1 = 0.4 ;
+            float r2 = 0.9 ;
+            float r3 = 0.29;
+            float x = gl_FragCoord.x;
+            float y = gl_FragCoord.y;
+            float h = uRes.y;
+            float w = uRes.x;
+
+
+            float col =
+			    sin(distance( vec2(x * r1 + time, y * r2), vec2(w / r3 , h) ) * scale) +
+			    sin(distance( vec2(x, y * r2), vec2(1.0 / h * r3, w * r1) ) * scale) +
+			    sin(distance( vec2(r3 * x + time, r1 * y + time), vec2(w * r2 + h * r1, h * r2) ) * scale) +
+			    sin(distance( vec2(1.0 / x * r3 , y * r2), vec2(h, w) ) * scale);
+
+            vec3 color = vec3(cos(iR), cos(col +iG), cos(col+iB));
+            color += mod(gl_FragCoord.x, 1.0) < 1.0 ? 0.0 : 0.0;
+
+            gl_FragColor = vec4(color,  1.0);
+		}
+
 </script>
+    <script>
 
-
-<script src="asd.js" defer ></script>
+    </script>
 </html>

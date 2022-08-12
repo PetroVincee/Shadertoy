@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "SPOT BOT",
+    "description": "Kiváló a támasz és ellenállási szintek, HODL, RSI, MA, GAP stratégiáknak az automatizálására. Beállíthatod, hogy egyszer, többször, vagy akár korlátlanul is teljesítse a kívánt tranzakciókat.",
+    "loginBG": "aqua",
+    "color":{ "r" : 2.3, "g" : 0.0, "b" : 0.0, "a" : 1.0},
+    "url": "#"
+  },
+  {
+    "id": 2,
+    "title": "GENERÁTOR",
+    "description": "Korlátlan kereskedési szinteket tudsz beállítani gyorsan és egyszerűen a GENERÁTORRAL. Hasonlóan a SPOT BOT-hoz itt is vásárlás/eladás szinteket hozhatsz létre egyedi szabályrendszerek megadásával",
+    "loginBG": "red",
+    "color":{ "r" : 0.1, "g" : 0.3, "b" : 0.4, "a" : 1.0},
+    "url": "#"
+  },
+  {
+    "id": 3,
+    "title": "RSI BOT",
+    "description": "Az RSI BOT-tal be tudod állítani, hogy mekkora százalékon szeretnél vásárolni és eladni. Több várakozó tranzakciót is meg lehet adni a botnak, így amíg nem éri el a kívánt százalékokat, addig is tudod növelni a profit lehetőségét.",
+    "loginBG": "pink",
+    "color":{ "r" : 0.2, "g" : 0.45, "b" : 0.9, "a" : 1.0},
+    "url": "#"
+  }
+
+]
