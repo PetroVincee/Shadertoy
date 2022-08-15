@@ -27,7 +27,7 @@
             <h1>Tradensea</h1>
             <h2 id="title">Spot Bot</h2>
             <p id="description">Kiváló a támasz és ellenállási szintek, HODL, RSI, MA, GAP stratégiáknak az automatizálására. Beállíthatod, hogy egyszer, többször, vagy akár korlátlanul is teljesítse a kívánt tranzakciókat.</p>
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
             </svg>
@@ -72,12 +72,14 @@
         uniform float iG;
         uniform float iB;
 
+        uniform float r1;
+        uniform float r2;
+        uniform float r3;
+
 		void main() {
-            float scale = 0.009;
+            float scale = 0.00999;
             float time = uTime * 100.0;
-            float r1 = 0.4 ;
-            float r2 = 0.9 ;
-            float r3 = 0.29;
+
             float x = gl_FragCoord.x;
             float y = gl_FragCoord.y;
             float h = uRes.y;
@@ -85,12 +87,14 @@
 
 
             float col =
-			    sin(distance( vec2(x * r1 + time, y * r2), vec2(w / r3 , h) ) * scale) +
+			    sin(distance( vec2(x * r1 - time, y * r2), vec2(w * r3 , h) ) * scale) +
 			    sin(distance( vec2(x, y * r2), vec2(1.0 / h * r3, w * r1) ) * scale) +
 			    sin(distance( vec2(r3 * x + time, r1 * y + time), vec2(w * r2 + h * r1, h * r2) ) * scale) +
-			    sin(distance( vec2(1.0 / x * r3 , y * r2), vec2(h, w) ) * scale);
+			    sin(distance( vec2( r3 , y * r2), vec2(h, w) ) * scale);
 
-            vec3 color = vec3(cos(iR), cos(col +iG), cos(col+iB));
+            vec3 color = vec3(cos(iR), cos(col +iG), cos(col +iB));
+            if(iB != 0.0) color = vec3(cos(iR), cos(col +iG), cos(iB));
+            if(iR == 0.0) color = vec3(cos(col+iR), cos(iG), cos(col +iB));
             color += mod(gl_FragCoord.x, 1.0) < 1.0 ? 0.0 : 0.0;
 
             gl_FragColor = vec4(color,  1.0);

@@ -14,9 +14,13 @@ let indexValue = 0;
 showImg(indexValue);
 
 var color = {
-    r: 2.3,
-    g: 0.0,
-    b: 0.0
+    r : 0.0, g : 2.6, b : 0.1
+}
+
+var shader = {
+    r1:0.4,
+    r2:0.9,
+    r3:0.29,
 }
 
 window.addEventListener("scroll", function(){
@@ -42,14 +46,18 @@ function showImg(){
     title.innerHTML = jsonData[indexValue].title;
     description.innerHTML = jsonData[indexValue].description;
     color = jsonData[indexValue].color;
+    shader = jsonData[indexValue].shader;
     loginBTN.style.background = jsonData[indexValue].loginBG;
+    document.body.style.background = jsonData[indexValue].background;
+    console.log(indexValue)
+    document.body.style.backgroundAttachment = "fixed";
 }
 
 function init(){
     var gl = canvas.getContext('webgl');
 
     if(!gl){
-        console.log("eroor");
+        console.log("error");
         gl = canvas.getContext('experimental-webgl');
     }
 
@@ -78,6 +86,9 @@ function init(){
     program.iR = gl.getUniformLocation(program, "iR");
     program.iG = gl.getUniformLocation(program, "iG");
     program.iB = gl.getUniformLocation(program, "iB");
+    program.r1 = gl.getUniformLocation(program, "r1");
+    program.r2 = gl.getUniformLocation(program, "r2");
+    program.r3 = gl.getUniformLocation(program, "r3");
     program.uTime = gl.getUniformLocation(program, "uTime");
     program.uRes = gl.getUniformLocation(program, "uRes");
 
@@ -115,6 +126,11 @@ function init(){
         gl.uniform1f(program.iR, color.r );
         gl.uniform1f(program.iG, color.g );
         gl.uniform1f(program.iB, color.b );
+
+        gl.uniform1f(program.r1, shader.r1 );
+        gl.uniform1f(program.r2, shader.r2 );
+        gl.uniform1f(program.r3, shader.r3 );
+
 
         gl.drawArrays(gl.TRIANGLES, 0, 6);
 

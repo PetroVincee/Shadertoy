@@ -6,10 +6,10 @@ html,body {
     padding: 0;
     min-height: 100%;
     height: 100%;
-    background: radial-gradient(circle at 50% 25%, rgb(0, 255, 255) 0%, black 100%);
+    /*background: radial-gradient(circle at 50% 25%, rgb(0, 255, 255) 0%, black 100%);*/
     background-attachment: fixed;
 }
-
+/**/
 #shader{
     width: 60%;
     height: 125%;
@@ -21,7 +21,7 @@ html,body {
 }
 
 header{
-    z-index: 20;
+    z-index: 2000;
     position: fixed !important;
     background: rgba(0,0,0,0.5);
     backdrop-filter: blur(10px);
@@ -81,7 +81,7 @@ header nav .btn_login{
 .content{
     color:white;
     position: relative;
-    z-index: 10;
+    z-index: 100;
 }
 
 .content h1{
@@ -102,10 +102,13 @@ header nav .btn_login{
     font-style: normal;
     font-weight: 300;
     font-size: 40px;
+    line-height: 104.6%;
     text-align: center;
-    text-transform: uppercase;
     letter-spacing: 3.005em;
+    text-transform: uppercase;
     margin-top: 2.5rem;
+    /*text-indent: 4vw;*/
+    padding-left: 3.005em !important;
 }
 .content p{
     margin-top: 1rem;
@@ -123,15 +126,15 @@ header nav .btn_login{
     background:rgba(255,255,255, 0.2);
     color: white !important;
     border-radius: 50%;
-    padding: 7px;
-    margin-left:calc(50% - 40px);
+    padding: 0.5%;
+    margin-left:calc(50% - 51px);
     text-align: center;
     margin-top: 2rem !important;
 }
 
 .content .slider{
     display:block;
-    margin-top: 4rem;
+    margin-top: 3rem;
 }
 
 .content .slider .line{
@@ -192,10 +195,10 @@ header nav .btn_login{
 }
 
 .content .slider .lineHelper{
+    margin-top:1rem;
     z-index: 100;
     width: 100%;
     text-align: center;
-    background: green;
 }
 
 .content .slider .lineHelper .line2{
@@ -259,9 +262,9 @@ header nav .btn_login{
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: #FFFFFF;
-    /*width: 100%;*/
-    /*text-align: center;*/
-    margin-left: calc(50% - 50px);
+    width: 100%;
+    text-align: center;
+    /*margin-left: calc(50% - 50px);*/
 }
 
 .content .slider h3{
